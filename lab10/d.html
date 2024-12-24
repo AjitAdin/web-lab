@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>parseJSON() in jQuery</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    #content { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>parseJSON() in jQuery</h1>
+  <button id="loadParseJSONBtn">Parse and Display JSON</button>
+  <div id="content"></div>
+
+  <script>
+    $(document).ready(function() {
+      $('#loadParseJSONBtn').click(function() {
+        $.ajax({
+          url: 'data.json', // URL to fetch JSON data
+          method: 'GET', // HTTP method (GET to retrieve data)
+          dataType: 'json', // Tell jQuery to expect JSON response
+          success: function(response) {
+            // No need to parse JSON manually. It's already parsed as an object.
+            $('#content').html(`
+              <p>Name: ${response.name}</p>
+              <p>Age: ${response.age}</p>
+              <p>City: ${response.city}</p>
+            `);
+          },
+          error: function() {
+            alert('Failed to load JSON data.');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

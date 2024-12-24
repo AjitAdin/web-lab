@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AJAX with getJSON() in jQuery</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    #content { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>AJAX with getJSON() in jQuery</h1>
+  <button id="loadJSONBtn">Load JSON Content</button>
+  <div id="content"></div>
+
+  <script>
+    $(document).ready(function() {
+      $('#loadJSONBtn').click(function() {
+        $.getJSON('data.json', function(data) {
+          $('#content').html(`<pre>${JSON.stringify(data, null, 2)}</pre>`);
+        }).fail(function() {
+          alert('Failed to load JSON data.');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

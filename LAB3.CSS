@@ -1,0 +1,82 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f5; /* Light grey background */
+    margin: 20px;
+}
+
+/* Element Selector - Targets all <h2> and <h3> tags */
+h2 {
+    color: #2a9d8f; /* Teal color */
+    font-size: 2em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+h3 {
+    color: #264653; /* Dark greenish-blue */
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+/* Attribute Selector - Styles all links with a title attribute */
+a[title] {
+    color: #e76f51; /* Coral color */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a[title]:hover {
+    text-decoration: underline;
+    color: #f4a261; /* Light coral */
+}
+
+/* Class Selector - Applies styles to a div with a class */
+div.container {
+    border: 2px solid #2a9d8f; /* Teal border */
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #ffffff; /* White background */
+}
+
+/* ID Selector - Targets a specific <span> by its ID */
+#highlight {
+    background-color: #f4a261; /* Light orange */
+    color: white;
+    padding: 5px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Descendant Selector - Targets <p> inside a <div> */
+div.container p {
+    font-size: 1em;
+    color: #6a4c93; /* Purple */
+    margin: 10px 0;
+}
+
+/* Universal Selector - Applies styles to all <img> tags */
+img {
+    max-width: 100%; /* Responsive image */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Shadow */
+}
+
+/* Pseudo-class Selector - Styles <time> elements on hover */
+time:hover {
+    color: #264653; /* Dark greenish-blue */
+    font-weight: bold;
+}
+
+/* Style for <hr> - Thematic breaks */
+hr {
+    border: none;
+    border-top: 2px solid #264653; /* Dark greenish-blue */
+    margin: 20px 0;
+}
+
+/* Style for <p> - General paragraphs */
+p {
+    line-height: 1.6; /* Improves readability */
+    color: #333333; /* Dark grey */
+}

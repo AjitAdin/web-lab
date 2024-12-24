@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"> <!-- Specifies the character encoding as UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ensures responsive design -->
+  <title>AJAX without jQuery</title> <!-- Title that appears in the browser tab -->
+  
+  <style>
+    /* Basic styling for the page */
+    body {
+      font-family: Arial, sans-serif; /* Sets the font family */
+      margin: 20px; /* Adds margin around the page */
+    }
+    
+    #content {
+      margin-top: 20px; /* Adds top margin to the content div */
+    }
+  </style>
+</head>
+<body>
+  <h1>AJAX without jQuery</h1> <!-- Main header text -->
+  
+  <!-- Button that triggers the AJAX request when clicked -->
+  <button onclick="loadText()">Load Text Content</button>
+  
+  <!-- Div where the loaded content will be displayed -->
+  <div id="content"></div>
+
+  <script>
+    // Function that will be triggered when the button is clicked
+    function loadText() {
+      // Creates a new instance of XMLHttpRequest (AJAX)
+      var xhr = new XMLHttpRequest();
+      
+      // Initializes the request: 'GET' method, 'textfile.txt' path, asynchronous request (true)
+      xhr.open('GET', 'textfile.txt', true);
+      
+      // Defines a callback function that handles the response when readyState changes
+      xhr.onreadystatechange = function() {
+        // Checks if the request is complete and successful (status 200)
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          // Places the response text into the 'content' div
+          document.getElementById('content').innerText = xhr.responseText;
+        }
+      };
+      
+      // Sends the request to the server
+      xhr.send();
+    }
+  </script>
+</body>
+</html>

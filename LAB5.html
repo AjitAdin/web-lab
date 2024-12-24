@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newspaper Layout</title>
+    <style>
+        /* General body styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #0b0c0c;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        /* Navigation Styles */
+        nav {
+            background-color: #004080;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Section Styles */
+        main {
+            display: flex;
+            margin: 20px;
+        }
+
+        /* Article Styles */
+        article {
+            flex: 3;
+            padding: 20px;
+            background-color: #ffffff;
+            margin-right: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        article h2 {
+            color: #003366;
+        }
+
+        /* Aside Styles */
+        aside {
+            flex: 1;
+            background-color: #e6f7ff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        aside h3 {
+            color: #003366;
+        }
+
+        /* Section Styles */
+        section {
+            margin-bottom: 20px;
+        }
+
+        section h2 {
+            color: #004080;
+        }
+
+        /* Figure Styles */
+        figure {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        figure img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        figure figcaption {
+            color: #555;
+            font-style: italic;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #004080;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Daily Times</h1>
+        <p>Your trusted source for daily news</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">World</a>
+        <a href="#">Sports</a>
+        <a href="#">Technology</a>
+        <a href="#">Entertainment</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Main Article Section -->
+        <article>
+            <h2>Main Headline</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec posuere, ligula non tincidunt commodo, erat orci venenatis arcu, vel pharetra nulla nisl eget nisi.</p>
+
+            <section>
+                <h2>Subheadline</h2>
+                <p>Curabitur auctor urna ut lorem tempor, nec tincidunt orci tincidunt. Nam suscipit risus in eros volutpat, vel vehicula lectus vehicula.</p>
+            </section>
+
+            <!-- Figure with an Image -->
+            <figure>
+                <img src="https://via.placeholder.com/600x400" alt="Breaking News">
+                <figcaption>Breaking news image caption.</figcaption>
+            </figure>
+
+            <!-- Table -->
+            <section>
+                <h2>News Summary Table</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Headline</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>World</td>
+                            <td>Global markets recover after major setback</td>
+                        </tr>
+                        <tr>
+                            <td>Sports</td>
+                            <td>Team wins championship after thrilling match</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </article>
+
+        <!-- Sidebar -->
+        <aside>
+            <h3>Sidebar</h3>
+            <p>Latest Updates:</p>
+            <ul>
+                <li><a href="#">Breaking: New policies announced</a></li>
+                <li><a href="#">Sports: Upcoming events</a></li>
+                <li><a href="#">Technology: New gadgets released</a></li>
+            </ul>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Daily Times. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

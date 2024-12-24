@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Script Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            margin-bottom: 20px;
+        }
+
+        .animated-div {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            margin: 10px 0;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Append Content</h2>
+        <p id="text">This is an existing paragraph.</p>
+        <ul id="list">
+            <li>First item</li>
+            <li>Second item</li>
+        </ul>
+        <button id="appendButton">Append Content</button>
+    </div>
+
+    <div class="container">
+        <h2>Animate Element</h2>
+        <div class="animated-div"></div>
+        <button id="animateButton">Animate</button>
+    </div>
+</body>
+<script src="script.js"></script>
+<!-- or -->
+<script>
+    $(document).ready(function () {
+        // a. Append content to paragraph and list
+        $("#appendButton").click(function () {
+            $("#text").append(" Appended text.");
+            $("#list").append("<li>Appended item</li>");
+        });
+
+        // b. Animate element and change state using animate()
+        $("#animateButton").click(function () {
+            $(".animated-div").animate(
+                {
+                    width: "200px",
+                    height: "200px",
+                    marginLeft: "50px",
+                },
+                1000, // Animation duration in milliseconds
+                function () {
+                    // c. Change the color of the animated div
+                    $(this).css("background-color", "orange");
+                }
+            );
+        });
+    });
+
+</script>
+
+</html>

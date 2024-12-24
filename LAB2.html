@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Time Table</title>
+    <style>
+        /* Styling for the table */
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        /* Table headers and footers */
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #f4b400; /* Yellow header */
+            color: white;
+        }
+
+        tfoot td {
+            background-color: #4285f4; /* Blue footer */
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Row background colors */
+        tr:nth-child(odd) {
+            background-color: #f9f9f9; /* Light grey */
+        }
+
+        tr:nth-child(even) {
+            background-color: #e8f5e9; /* Light green */
+        }
+
+        /* Highlight lab and elective hours */
+        .lab {
+            background-color: #f06292; /* Pink */
+            color: white;
+        }
+
+        .elective {
+            background-color: #81d4fa; /* Light blue */
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Class Time Table</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>9:00 - 10:00</th>
+                <th>10:00 - 11:00</th>
+                <th>11:00 - 12:00</th>
+                <th>12:00 - 1:00</th>
+                <th>2:00 - 3:00</th>
+                <th>3:00 - 4:00</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Monday</td>
+                <td>Math</td>
+                <td>Physics</td>
+                <td class="lab" rowspan="2">Lab Session</td>
+                <td>Break</td>
+                <td>English</td>
+                <td class="elective">Elective</td>
+            </tr>
+            <tr>
+                <td>Tuesday</td>
+                <td>Biology</td>
+                <td>Chemistry</td>
+                <td>Break</td>
+                <td>History</td>
+                <td>Geography</td>
+            </tr>
+            <tr>
+                <td>Wednesday</td>
+                <td>Math</td>
+                <td>Physics</td>
+                <td>Chemistry</td>
+                <td>Break</td>
+                <td class="lab" colspan="2">Lab Session</td>
+            </tr>
+            <tr>
+                <td>Thursday</td>
+                <td>Biology</td>
+                <td>Physics</td>
+                <td>English</td>
+                <td>Break</td>
+                <td>History</td>
+                <td class="elective">Elective</td>
+            </tr>
+            <tr>
+                <td>Friday</td>
+                <td>Math</td>
+                <td>Physics</td>
+                <td class="lab">Lab Session</td>
+                <td>Break</td>
+                <td>Geography</td>
+                <td>Sports</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="7">Note: Lab and elective hours are highlighted with colors for emphasis.</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>
