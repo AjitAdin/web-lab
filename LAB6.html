@@ -1,198 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Calculator</title>
-    <style>
-        /* Basic styling for the calculator */
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f9;
-        }
-
-        .calculator {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-
-        .output {
-            width: 100%;
-            padding: 10px;
-            font-size: 24px;
-            text-align: right;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-
-        button {
-            padding: 20px;
-            font-size: 18px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #e0e0e0;
-        }
-
-        button:active {
-            background-color: #ccc;
-        }
-
-        .equal {
-            background-color: #4CAF50;
-            color: white;
-            grid-column: span 2;
-        }
-
-        .clear {
-            background-color: #f44336;
-            color: white;
-            grid-column: span 2;
-        }
-
-        .operator {
-            background-color: #ffc107;
-            color: white;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Calculator</title>
+  
+ <style>
+    /* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: orange; 
+  }
+  
+  /* Calculator container styling */
+  .calculator {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+  }
+  
+  /* Input fields styling */
+  input[type="number"],
+  input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  /* Button styling */
+  button {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  
+ </style>
 </head>
-
 <body>
-    <div class="calculator">
-        <h2>Simple Calculator</h2>
-        <input type="text" id="output" class="output" disabled>
-        <div class="buttons">
-            <!-- Buttons for numbers and operators -->
-            <button onclick="appendNumber(1)">1</button>
-            <button onclick="appendNumber(2)">2</button>
-            <button onclick="appendNumber(3)">3</button>
-            <button onclick="appendOperator('+')" class="operator">+</button>
 
-            <button onclick="appendNumber(4)">4</button>
-            <button onclick="appendNumber(5)">5</button>
-            <button onclick="appendNumber(6)">6</button>
-            <button onclick="appendOperator('-')" class="operator">-</button>
+<div class="calculator">
+  <h1>Simple Calculator</h1>
+  <form id="calculatorForm">
+    <input type="number" id="num1" placeholder="Enter first number" required>
+    <input type="number" id="num2" placeholder="Enter second number" required>
+    <br><br>
+    <button type="button" onclick="calculate('sum')">Sum</button>
+    <button type="button" onclick="calculate('difference')">Difference</button>
+    <button type="button" onclick="calculate('product')">Product</button>
+    <button type="button" onclick="calculate('quotient')">Quotient</button>
+    <button type="button" onclick="calculate('remainder')">Remainder</button>
+    <button type="button" onclick="calculate('power')">Power</button>
+    <button type="button" onclick="calculate('square')">Square</button>
+    <button type="button" onclick="calculate('sqrt')">Square Root</button>
+    <br><br>
+    <input type="text" id="result" placeholder="Result" readonly> 
+  </form>
+</div>
 
-            <button onclick="appendNumber(7)">7</button>
-            <button onclick="appendNumber(8)">8</button>
-            <button onclick="appendNumber(9)">9</button>
-            <button onclick="appendOperator('*')" class="operator">*</button>
-
-            <button onclick="appendNumber(0)">0</button>
-            <button onclick="clearOutput()" class="clear">C</button>
-            <button onclick="calculateResult()" class="equal">=</button>
-            <button onclick="appendOperator('/')" class="operator">/</button>
-
-            <button onclick="calculateSquare()">x²</button>
-            <button onclick="calculateSquareRoot()">√x</button>
-            <button onclick="appendOperator('%')" class="operator">%</button>
-            <button onclick="calculatePower()">x^y</button>
-        </div>
-    </div>
-
-    <script>
-        let currentInput = ''; // To store the current input for calculation
-        let operator = ''; // To store the operator for calculation
-
-        // Function to append numbers to the display
-        function appendNumber(num) {
-            currentInput += num;
-            document.getElementById('output').value = currentInput;
-        }
-
-        // Function to append operators to the display
-        function appendOperator(op) {
-            if (currentInput !== '') {
-                operator = op;
-                currentInput += ' ' + operator + ' ';
-                document.getElementById('output').value = currentInput;
-            }
-        }
-
-        // Function to clear the output
-        function clearOutput() {
-            currentInput = '';
-            document.getElementById('output').value = '';
-        }
-
-        // Function to calculate the result based on the current input
-        function calculateResult() {
-            try {
-                let result = eval(currentInput);
-                document.getElementById('output').value = result;
-                currentInput = result.toString();
-            } catch (error) {
-                document.getElementById('output').value = 'Error';
-            }
-        }
-
-        // Function to calculate the square of a number
-        function calculateSquare() {
-            let num = parseFloat(currentInput);
-            if (!isNaN(num)) {
-                let square = Math.pow(num, 2);
-                document.getElementById('output').value = square;
-                currentInput = square.toString();
-            } else {
-                document.getElementById('output').value = 'Error';
-            }
-        }
-
-        // Function to calculate the square root of a number
-        function calculateSquareRoot() {
-            let num = parseFloat(currentInput);
-            if (!isNaN(num)) {
-                let squareRoot = Math.sqrt(num);
-                document.getElementById('output').value = squareRoot;
-                currentInput = squareRoot.toString();
-            } else {
-                document.getElementById('output').value = 'Error';
-            }
-        }
-
-        // Function to calculate power (x^y)
-        function calculatePower() {
-            let nums = currentInput.split('^');
-            if (nums.length === 2) {
-                let base = parseFloat(nums[0].trim());
-                let exponent = parseFloat(nums[1].trim());
-                if (!isNaN(base) && !isNaN(exponent)) {
-                    let power = Math.pow(base, exponent);
-                    document.getElementById('output').value = power;
-                    currentInput = power.toString();
-                } else {
-                    document.getElementById('output').value = 'Error';
-                }
-            }
-        }
-    </script>
 </body>
-
+<script>
+    // Function to perform calculator operations
+function calculate(operation) {
+    // Get input values
+    const num1 = parseFloat(document.getElementById('num1').value);
+    const num2 = parseFloat(document.getElementById('num2').value);
+    let result;
+  
+    // Perform calculations based on the operation
+    switch (operation) {
+      case 'sum':
+        result = num1 + num2;
+        break;
+      case 'difference':
+        result = num1 - num2;
+        break;
+      case 'product':
+        result = num1 * num2;
+        break;
+      case 'quotient':
+        result = num1 / num2;
+        break;
+      case 'remainder':
+        result = num1 % num2;
+        break;
+      case 'power':
+        result = Math.pow(num1, num2);
+        break;
+      case 'square':
+        result = Math.pow(num1, 2); // Square of the first number
+        break;
+      case 'sqrt':
+        result = Math.sqrt(num1); // Square root of the first number
+        break;
+      default:
+        result = 'Invalid operation';
+    }
+  
+    // Display the result
+    document.getElementById('result').value = result;
+  }
+  
+</script>
 </html>
