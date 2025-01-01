@@ -66,63 +66,61 @@
     }
 
     // 3. Convert JSON to CSV and CSV to JSON
+
+    // JSON to CSV function
+    const jsonToCSV = json => [
+      Object.keys(json[0]).join(','),
+      ...json.map(row => Object.values(row).join(','))
+    ].join('\r\n');
+
+    // Function to convert JSON to CSV
     function jsonToCsv() {
-  const jsonText = document.getElementById('jsonForCSV').value;
-  try {
-    const jsonArray = JSON.parse(jsonText); // Parse JSON array
-    console.log(jsonArray)
-    if (!Array.isArray(jsonArray) || jsonArray.length === 0) {
-      throw new Error('JSON must be an array with at least one object');
-    }
+      const jsonText = document.getElementById('jsonForCSV').value;
+      try {
+        const jsonArray = JSON.parse(jsonText); // Parse JSON array
+        if (!Array.isArray(jsonArray) || jsonArray.length === 0) {
+          throw new Error('JSON must be an array with at least one object');
+        }
 
-    const keys = Object.keys(jsonArray[0]); // Extract headers
-
-    // Generate the header row
-    let csv = keys.join(',') + '\r\n';
-
-    // Generate the data rows
-    for (let row of jsonArray) {
-      let rowValues = keys.map(key => JSON.stringify(row[key] || '')).join(',');
-      csv += rowValues + '\r\n';
-    }
-
-    document.getElementById('csvResult').textContent = csv; // Display CSV
-  } catch (e) {
-    document.getElementById('csvResult').textContent = 'Invalid JSON!';
-  }
-}
-
-function csvToJson() {
-  const csvToJsonInput = document.getElementById('csvInput').value;  // Corrected here
-  try {
-    const lines = csvToJsonInput.trim().split('\n');
-    console.log(lines);
-    if (lines.length < 2) throw new Error('CSV must have a header and at least one data row.');
-
-   
-
-    const headers = lines[0].split(',').map(header => header.trim());
-    console.log(headers)
-    const json = [];
-
-    for (let i = 1; i < lines.length; i++) {
-      const values = lines[i].split(',').map(value => value.trim().replace(/^"|"$/g, ''));
-      console.log(values)
-      const jsonObject = {};
-      for (let j = 0; j < headers.length; j++) {
-        jsonObject[headers[j]] = values[j] || '';
-        console.log(jsonObject)
+        const csv = jsonToCSV(jsonArray); // Use the shorter jsonToCSV function
+        document.getElementById('csvResult').textContent = csv; // Display CSV
+      } catch (e) {
+        document.getElementById('csvResult').textContent = 'Invalid JSON!';
       }
-      json.push(jsonObject);
     }
 
-    document.getElementById('jsonFromCsvResult').textContent = JSON.stringify(json, null, 2);
-  } catch (e) {
-    document.getElementById('jsonFromCsvResult').textContent = 'Invalid CSV';
-  }
-}
+    // CSV to JSON function
+    const csvToJSON = csv => {
+      const lines = csv.trim().split('\n');
+      const headers = lines[0].split(',').map(header => header.trim()); // Get headers from the first row
+      const result = [];
 
+      // Start iterating from the second row to map the CSV data to JSON
+      for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(',').map(value => value.trim()); // Split values in the current row
+        const jsonObject = {};
 
+        // For each column, match the header with the corresponding value
+        for (let j = 0; j < headers.length; j++) {
+          jsonObject[headers[j]] = values[j] || ''; // Assign value to corresponding header key
+        }
+
+        result.push(jsonObject); // Add the object to the result array
+      }
+
+      return result;
+    };
+
+    // Function to convert CSV to JSON
+    function csvToJson() {
+      const csvToJsonInput = document.getElementById('csvInput').value;
+      try {
+        const json = csvToJSON(csvToJsonInput); // Use the csvToJSON function to parse the CSV input
+        document.getElementById('jsonFromCsvResult').textContent = JSON.stringify(json, null, 2);
+      } catch (e) {
+        document.getElementById('jsonFromCsvResult').textContent = 'Invalid CSV';
+      }
+    }
 
     // 4. Create Hash from String
     async function createHash() {
@@ -134,17 +132,14 @@ function csvToJson() {
       try {
         const encoder = new TextEncoder();
         const data = encoder.encode(stringInput);
-        console.log(data)
-        const hashBuffer = await crypto.subtle.digest('SHA-256', data); // Generate SHA-256 hash
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
         const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join(''); // Convert to hex
+        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         document.getElementById('hashResult').textContent = `Hash: ${hashHex}`;
       } catch (e) {
         document.getElementById('hashResult').textContent = 'Error creating hash!';
       }
     }
   </script>
-  <!-- <script src=""></script> -->
 </body>
 </html>
-                           

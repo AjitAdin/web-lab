@@ -1,87 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>CSV to JSON</title>
 </head>
-<style>
-  body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: orange;
-  }
-  .calculator{
-    background-color: white;
-    border-radius: 15px;
-    padding: 25px;
-    width: 300px;
-   
-  }
-  input[type="number"],
-  input[type="text"]{
-    width: 250px;
-    margin: 5px 0;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-
-  }
- 
-</style>
 <body>
-  <div class="calculator">
-    <h1>Simple calculator</h1>
-    <form action="#" id="calculatorform">
-      <input type="number" id="num1" placeholder="Enter First Number">
-      <input type="number" id="num2" placeholder="Enter SeconD Number">
-      <br><br>
-      <button type="button" onclick="calculate('sum')">Sum</button>
-      <button type="button" onclick="calculate('difference')">Difference</button>
-      <button type="button" onclick="calculate('product')">Product</button>
-      <button type="button" onclick="calculate('quotient')">Quotient</button>
-      <button type="button" onclick="calculate('remainder')">Remainder</button>
-      <button type="button" onclick="calculate('power')">Power</button>
-      <button type="button" onclick="calculate('square')">Square</button>
-      <button type="button" onclick="calculate('sqrt')">Square Root</button>
-      <button type="button" onclick="calculate('nothing')">nothing</button>
-      <br><br>
-      <input type="text" id="result" placeholder="Result" readonly>
-    </form>
-  </div>
-</body>
-<script>
-  function calculate(operation) {
-    const num1 = parseFloat(document.getElementById('num1').value);
-    const num2 = parseFloat(document.getElementById('num2').value)
-    let result;
-    switch (operation) {
-      case 'sum':
-        result = num1 + num2;
-        break;
-      case 'difference':
-        result = num1 - num2;
-        break;
-      case 'product':
-        result = num1 * num2;
-        break;
-   case 'power':
-    result=Math.pow(num1,num2);
-    break;
-    case 'square':
-      result=Math.pow(num1,2);
-      break;
-      case 'sqrt':
-        result=Math.sqrt(num1);
-        break;
-    }
-    document.getElementById('result').value=result;
-  }
-</script>
+  <h1>CSV to JSON</h1>
 
+  <h3>Convert CSV to JSON</h3>
+  <textarea id="csvInput" rows="4" cols="50" placeholder="name,age\nJohn,30\nJane,25"></textarea><br>
+  <button onclick="csvToJson()">Convert to JSON</button>
+  <pre id="jsonFromCsvResult"></pre>
+
+  <script>
+    // Shortened CSV to JSON function
+    const csvToJSON = csv => csv.split('\n').slice(1).map(row => {
+      const [name, age] = row.split(',');
+      return { name, age };
+    });
+
+    // Convert CSV to JSON and display the result
+    function csvToJson() {
+      const csvInput = document.getElementById('csvInput').value;
+      try {
+        const json = csvToJSON(csvInput);
+        document.getElementById('jsonFromCsvResult').textContent = JSON.stringify(json, null, 2);
+      } catch (e) {
+        document.getElementById('jsonFromCsvResult').textContent = 'Invalid CSV';
+      }
+    }
+  </script>
+</body>
 </html>
